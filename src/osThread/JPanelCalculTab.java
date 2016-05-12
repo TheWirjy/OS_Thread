@@ -1,11 +1,12 @@
 
 package osThread;
 
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -54,14 +55,7 @@ public class JPanelCalculTab extends JPanel
 			progressBar[i] = new JProgressBar();
 			}
 
-		// Layout : Specification
-			{
-			FlowLayout flowlayout = new FlowLayout(FlowLayout.LEFT);
-			setLayout(flowlayout);
-
-			// flowlayout.setHgap(20);
-			// flowlayout.setVgap(20);
-			}
+			setLayout(null);
 
 		// JComponent : add
 		add(btnRun);
@@ -95,15 +89,30 @@ public class JPanelCalculTab extends JPanel
 
 	private void appearance()
 		{
-		int width = 200 / nbThread;
-		Dimension size = new Dimension(width, 30);
+		int width = 180 / nbThread - ((nbThread-1) * 10) / nbThread;
+		Dimension size = new Dimension(width, 20);
 		for(int i = 0; i < nbThread; i++)
 			{
 			progressBar[i].setSize(size);
 			progressBar[i].setPreferredSize(size);
 			progressBar[i].setMaximumSize(size);
 			progressBar[i].setMinimumSize(size);
+			progressBar[i].setLocation( i *width + (i+1) * 10, 40);
 			}
+
+			size = new Dimension(180, 20);
+			lblResult.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			lblResult.setText(nbThread + " thread(s): ");
+			lblResult.setSize(size);
+			lblResult.setPreferredSize(size);
+			lblResult.setMinimumSize(size);
+			lblResult.setLocation(10,  10);
+
+			btnRun.setSize(size);
+			btnRun.setPreferredSize(size);
+			btnRun.setMinimumSize(size);
+			btnRun.setLocation(10,  70);
+
 		}
 
 	private Runnable calculThread(JProgressBar bar, int b1, int b2, int ratio)
@@ -162,7 +171,7 @@ public class JPanelCalculTab extends JPanel
 					e.printStackTrace();
 					}
 				time = System.currentTimeMillis() - time;
-				lblResult.setText(time + "ms");
+				lblResult.setText(nbThread + " thread(s): " + time + "ms");
 				}
 			}).start();
 		}

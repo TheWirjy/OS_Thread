@@ -2,15 +2,12 @@
 package osThread;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -48,62 +45,28 @@ public class JPanelMain2 extends JPanel
 		{
 		// JComponent : Instanciation
 		btnRun = new JButton("Run");
-		label1 = new JLabel("THREAD 1");
-		label2 = new JLabel("THREAD 2");
-		label1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		label2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		textArea1 = new JTextArea("");
-		Box VBox = Box.createVerticalBox();
-		Box HBox = Box.createHorizontalBox();
-		HBox.add(label1);
-		HBox.add(textArea1);
-		HBox.add(Box.createHorizontalStrut(10));
-		HBox.add(label2);
-		VBox.add(btnRun);
-		VBox.add(HBox);
+		Dimension dim = new Dimension(200, 350);
+		textArea1 = new JTextArea("SANS MUTEX");
+		textArea1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		textArea1.setEditable(false);
+		textArea1.setPreferredSize(dim);
+		textArea1.setSize(dim);
+		textArea1.setMinimumSize(dim);
+		textArea1.setLocation(10, 10);
 
-		JPanel contentPane = new JPanel();
+		dim = new Dimension(200, 20);
+		btnRun.setSize(dim);
+		btnRun.setPreferredSize(dim);
+		btnRun.setMinimumSize(dim);
+		btnRun.setLocation(10, 370);
+		setLayout(null);
 
-		// Layout : Specification
-			{
-			BoxLayout layout = new BoxLayout(contentPane, BoxLayout.Y_AXIS);
-			contentPane.setLayout(layout);
-			setLayout(new FlowLayout());
-			}
-
-		// JComponent : add
-		contentPane.add(VBox);
-		add(contentPane);
+		add(textArea1);
+		add(btnRun);
 		}
 
 	private void control()
 		{
-		th1 = new Thread(new Runnable()
-			{
-
-
-			@Override
-			public void run()
-				{
-				// TODO Auto-generated method stub
-				//somme += 5;
-				//System.out.println(somme);
-				}
-			});
-
-		th2 = new Thread(new Runnable()
-			{
-
-
-			@Override
-			public void run()
-				{
-				// TODO Auto-generated method stub
-				//somme += 5;
-
-				}
-			});
-
 		btnRun.addActionListener(new ActionListener()
 			{
 
@@ -124,6 +87,7 @@ public class JPanelMain2 extends JPanel
 
 	private void start()
 		{
+		textArea1.setText("SANS MUTEX");
 		th1 = new Thread(runConcu("Thread1"));
 		th2 = new Thread(runConcu("Thread2"));
 		th1.start();
@@ -156,7 +120,6 @@ public class JPanelMain2 extends JPanel
 	// Tools
 	private Thread th1, th2;
 	private JButton btnRun;
-	private JLabel label1, label2;
 	private int somme = 0;
 	private JTextArea textArea1;
 	}

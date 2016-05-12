@@ -68,7 +68,8 @@ public class JFrameMain extends JFrame
 
 	private void appearance()
 		{
-		setSize(600, 900);
+		setSize(240, 480);
+		setTitle("OS - PTHREAD");
 		setLocationRelativeTo(null); // frame centrer
 		setVisible(true); // last!
 		}

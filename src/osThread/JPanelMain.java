@@ -1,10 +1,10 @@
 
 package osThread;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -44,19 +44,29 @@ public class JPanelMain extends JPanel
 		btnRun = new JButton("Run all");
 		calcul1 = new JPanelCalculTab(1);
 		calcul2 = new JPanelCalculTab(2);
-		JPanel contentPane = new JPanel();
 
-		// Layout : Specification
-			{
-			BoxLayout layout = new BoxLayout(contentPane, BoxLayout.Y_AXIS);
-			contentPane.setLayout(layout);
-			}
+		Dimension dim = new Dimension(200, 100);
+		calcul1.setSize(dim);
+		calcul1.setPreferredSize(dim);
+		calcul1.setMinimumSize(dim);
+		calcul1.setLocation(10, 10);
 
-		// JComponent : add
-			contentPane.add(btnRun);
-			contentPane.add(calcul1);
-			contentPane.add(calcul2);
-			add(contentPane);
+		calcul2.setSize(dim);
+		calcul2.setPreferredSize(dim);
+		calcul2.setMinimumSize(dim);
+		calcul2.setLocation(10, 120);
+
+		dim = new Dimension(180, 20);
+		btnRun.setSize(dim);
+		btnRun.setPreferredSize(dim);
+		btnRun.setMinimumSize(dim);
+		btnRun.setLocation(20, 230);
+
+		setLayout(null);
+
+		add(btnRun);
+		add(calcul1);
+		add(calcul2);
 		}
 
 	private void control()
